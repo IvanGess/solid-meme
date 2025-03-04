@@ -1,0 +1,18 @@
+@use '@/styles/core/colors' as colors;
+@use '@/styles/core/breakpoints' as breakpoints;
+
+.error-message {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 156%;
+
+  &__text {
+    color: colors.$error;
+  }
+
+}
+@media (max-width:breakpoints.$breakpoint-sm-max) {
+  .error-message {
+    font-size: 14px;
+  }
+}

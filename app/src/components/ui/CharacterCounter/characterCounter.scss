@@ -1,0 +1,9 @@
+@use '@/styles/core/colors' as colors;
+
+.character-counter {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 156%;
+  text-align: right;
+  color: colors.$gray;
+}
