@@ -1,0 +1,16 @@
+$fonts: (
+        400: 'montserrat-regular',
+        500: 'montserrat-medium',
+        600: 'montserrat-semibold',
+        700: 'montserrat-bold',
+        900: 'montserrat-black'
+);
+
+@each $weight, $filename in $fonts {
+  @font-face {
+    font-family: 'Montserrat';
+    src: url('@/assets/fonts/#{$filename}.woff2') format('woff2');
+    font-weight: $weight;
+    font-style: normal;
+  }
+}

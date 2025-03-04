@@ -1,0 +1,52 @@
+@use "colors" as colors;
+
+$font-family: 'Montserrat', sans-serif;
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+$h1-font-size: 104px;
+$h2-font-size: 104px;
+$h3-font-size: 104px;
+$h4-font-size: 104px;
+$h5-font-size: 104px;
+
+h1 {
+  font-family: $font-family;
+  font-weight: $font-weight-black;
+  font-size: $h1-font-size;
+  color: colors.$white;
+  line-height: 100%;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 150%;
+}
+
+h3 {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 150%;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 133%;
+}
+
+a {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 156%;
+  color: colors.$green-light;
+
+  &:hover {
+    color: colors.$white;
+  }
+}

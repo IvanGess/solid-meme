@@ -1,0 +1,42 @@
+@use '@/styles/core/colors' as colors;
+
+.text-area {
+  &__label {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 156%;
+    letter-spacing: 1.3px;
+    color: colors.$gray;
+    padding: 0 24px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-radius: 36px;
+    padding: 0 28px;
+    width: calc(100% - 56px);
+    height: 72px;
+    background-color: colors.$white;
+    margin-top: 8px;
+
+    &:hover, &:focus-within {
+      outline: 2px solid colors.$green-light;
+    }
+  }
+
+  &__field {
+    width: 100%;
+    height: 27px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 156%;
+    letter-spacing: 1.3px;
+    color: colors.$gray;
+  }
+
+  &__icon {
+    display: contents;
+  }
+}

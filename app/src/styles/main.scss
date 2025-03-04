@@ -1,0 +1,46 @@
+@use 'core/fonts';
+@use 'core/typography' as typography;
+@use 'core/breakpoints' as breakpoints;
+@use 'core/colors' as colors;
+@use 'core/reset';
+@use 'core/scrollbar';
+
+
+* {
+  font-family: typography.$font-family;
+  color: colors.$white;
+  padding: 0;
+}
+
+input {
+  border: none;
+  outline: none;
+
+  &:focus-visible {
+    border: none;
+    outline: none;
+  }
+}
+
+main {
+  margin: 0 auto;
+  max-width: 1920px;
+  min-width: 360px;
+  padding: 0 160px;
+}
+
+@media ((min-width:breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
+  main {
+    padding: 0 80px;
+  }
+}
+@media ((min-width: breakpoints.$breakpoint-sm-max) and (max-width: breakpoints.$breakpoint-md-max)) {
+  main {
+    padding: 0 40px;
+  }
+}
+@media (max-width:breakpoints.$breakpoint-sm-max) {
+  main {
+    padding: 0 20px;
+  }
+}
