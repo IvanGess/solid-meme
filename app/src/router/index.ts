@@ -10,7 +10,7 @@ const routes = [
   },
   {
     path: NOTES_PATH,
-    component: () => {},
+    component: () => import('@/views/NotesView.vue'),
     meta: {
       requiresAuth: true,
       title: 'Мои заметки'
@@ -18,7 +18,7 @@ const routes = [
   },
   {
     path: LOGIN_PATH,
-    component: () => {},
+    component: () => import('@/views/GuestView.vue'),
     meta: {
       requiresGuest: true,
       title: 'Вход'
