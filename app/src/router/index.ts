@@ -1,7 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import type { AuthService } from '@/services/auth.service.ts'
 
 const LOGIN_PATH = '/login'
 const NOTES_PATH = '/notes'
+
+interface RouteMeta {
+  requiresAuth?: boolean
+  requiresGuest?: boolean
+  title?: string
+}
 
 const routes = [
   {
@@ -34,6 +41,36 @@ const router = createRouter({
   }
 })
 
+export const setupRouterGuards = (authService: AuthService) => {
+  const checkAuth = async () => await authService.checkAuth()
+  const isAuthRoute = (to: any) => to.matched.some((r: { meta: RouteMeta }) => r.meta.requiresAuth)
+  const isGuestRoute = (to: any) => to.matched.some((r: { meta: RouteMeta }) => r.meta.requiresGuest)
 
+  router.beforeEach(async (to) => {
+    const isAuthenticated = await checkAuth()
+
+    if (to.path === '/') {
+      return isAuthenticated ? NOTES_PATH : LOGIN_PATH
+    }
+
+    if (isAuthRoute(to) && !isAuthenticated) {
+      return {
+        path: LOGIN_PATH,
+        query: { redirect: to.fullPath }
+      }
+    }
+
+    if (isGuestRoute(to) && isAuthenticated) {
+      return NOTES_PATH
+    }
+
+    return true
+  })
+
+  router.afterEach((to) => {
+    const meta = to.meta as RouteMeta
+    document.title = meta.title || 'MyNotes'
+  })
+}
 
 export default router
