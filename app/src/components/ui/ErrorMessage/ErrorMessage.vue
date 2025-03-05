@@ -12,7 +12,7 @@ import type {
   ErrorMessageProps
 } from '@/components/ui/ErrorMessage/interfaces/errorMessage.props.ts'
 
-const props = defineProps<ErrorMessageProps>();
+defineProps<ErrorMessageProps>();
 </script>
 
 <style lang="scss" scoped>
