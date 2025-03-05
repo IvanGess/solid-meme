@@ -67,7 +67,7 @@ const logout = async () => {
 </template>
 <style lang="scss" scoped>
 @use '@/styles/core/colors' as colors;
-@use 'typography' as typography;
+@use '@/styles/core/typography' as typography;
 
 .logout-link {
   color: colors.$green-light;
