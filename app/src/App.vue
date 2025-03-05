@@ -1,8 +1,9 @@
 <script setup lang="ts">
+import AppView from '@/views/AppView.vue'
 </script>
 
 <template>
-  <RouterView />
+  <AppView />
 </template>
 
 <style scoped>
