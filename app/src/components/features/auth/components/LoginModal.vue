@@ -65,7 +65,6 @@ const validateForm = () => {
   return validationErrors.length === 0;
 };
 
-
 const close = () => {
   modalService.close(authConstants.modalUuid)
 }
