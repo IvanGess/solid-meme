@@ -51,23 +51,14 @@ const handleInput = (event: Event) => {
     padding: 0 24px;
   }
 
-  &__container {
-    &--textarea {
-      height: auto;
-      min-height: 72px;
-      padding: 20px 28px;
-      align-items: flex-start;
-    }
-  }
-
   &__field {
     &--textarea {
-      height: auto;
-      min-height: 100px;
-      resize: vertical;
-      line-height: 1.5;
-      padding: 0;
+      min-height: 244px;
       font-family: inherit;
+      width: 100%;
+      border-radius: 36px;
+      padding: 16px;
+      color: colors.$dark;
     }
   }
 }

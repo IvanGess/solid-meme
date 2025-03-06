@@ -82,7 +82,7 @@ const resetForm = () => {
 <template>
   <ModalUI
     :modal-id="notesConstants.modalUuid"
-    header="Новая заметка"
+    header="Добавление заметки"
     @close="resetForm"
   >
     <template #content>
@@ -119,8 +119,7 @@ const resetForm = () => {
     <template #actions>
       <div class="actions-group">
         <ButtonUI
-          :label="isSubmitting ? 'Создание...' : 'Создать заметку'"
-          class="submit-button"
+          :label="isSubmitting ? 'добавление...' : 'Добавить'"
           :disabled="isSubmitting"
           @click="handleSubmit"
         />
@@ -163,25 +162,5 @@ $error-color: #dc2626;
   padding: 0.5rem;
   background: rgba($error-color, 0.05);
   border-radius: 4px;
-}
-
-.submit-button {
-  background: $primary-color;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-
-  &:hover {
-    background: $primary-color;
-  }
-
-  &:disabled {
-    background: $primary-color;
-    cursor: not-allowed;
-  }
 }
 </style>

@@ -96,7 +96,7 @@ const handleInput = (event: Event) => {
     font-size: 18px;
     line-height: 156%;
     letter-spacing: 1.3px;
-    color: colors.$gray;
+    color: colors.$dark;
     border: none;
     outline: none;
 

@@ -77,6 +77,13 @@ defineEmits<{
       font-weight: 500;
       letter-spacing: 1.7px;
       margin-top: -2px;
+      width: 100%;
+      max-height: 283px;
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &--btn-wrapper {
