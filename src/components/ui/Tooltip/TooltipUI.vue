@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import type { TooltipProps } from '@/components/ui/ToolTip/interfaces/tooltip.interface.ts';
+import type { TooltipProps } from '@/components/ui/Tooltip/interfaces/tooltip.interface.ts';
 
 defineProps<TooltipProps>();
 

@@ -23,7 +23,7 @@ interface Props {
   cols?: number;
 }
 
-const { rows, cols } = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
   rows: 4,
   cols: 50,
 });

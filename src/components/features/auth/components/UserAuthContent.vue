@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router';
 import { computed, onMounted } from 'vue';
 import { authConstants } from '@/components/features/auth/auth.constants.ts';
 import IconUser from '@/components/icons/IconUser.vue';
-import TooltipUI from '@/components/ui/ToolTip/TooltipUI.vue';
+import TooltipUI from '@/components/ui/Tooltip/TooltipUI.vue';
 
 const authService = useAuthService();
 const modalService = useModalService();
