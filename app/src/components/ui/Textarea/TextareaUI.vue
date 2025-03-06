@@ -29,7 +29,7 @@ const { rows, cols } = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
+  (e: 'update:modelValue', value: string): void;
 }>();
 
 const handleInput = (event: Event) => {

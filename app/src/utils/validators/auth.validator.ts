@@ -17,11 +17,17 @@ export class AuthValidator {
     const errors: Array<{ field: string; message: string }> = [];
 
     if (!this.validateEmail(email)) {
-      errors.push({ field: 'email', message: 'Пожалуйста, введите корректный email' });
+      errors.push({
+        field: 'email',
+        message: 'Пожалуйста, введите корректный email',
+      });
     }
 
     if (!this.validatePassword(password)) {
-      errors.push({ field: 'password', message: 'Пароль должен содержать минимум 8 символов' });
+      errors.push({
+        field: 'password',
+        message: 'Пароль должен содержать минимум 8 символов',
+      });
     }
 
     if (!isLogin && password !== confirmPassword) {

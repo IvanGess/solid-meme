@@ -27,11 +27,11 @@
 </template>
 
 <script setup lang="ts">
-import InputUI from '@/components/ui/Input/InputUI.vue'
-import type TextareaUI from '@/components/ui/Textarea/TextareaUI.vue'
-import { computed } from 'vue'
-import ErrorMessage from '@/components/ui/ErrorMessage/ErrorMessage.vue'
-import CharacterCounter from '@/components/ui/CharacterCounter/CharacterCounter.vue'
+import InputUI from '@/components/ui/Input/InputUI.vue';
+import type TextareaUI from '@/components/ui/Textarea/TextareaUI.vue';
+import { computed } from 'vue';
+import ErrorMessage from '@/components/ui/ErrorMessage/ErrorMessage.vue';
+import CharacterCounter from '@/components/ui/CharacterCounter/CharacterCounter.vue';
 
 interface Props {
   component?: typeof InputUI | typeof TextareaUI;
@@ -47,7 +47,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number): void
+  (e: 'update:modelValue', value: string | number): void;
 }>();
 
 const valueLength = computed(() => {
@@ -55,7 +55,7 @@ const valueLength = computed(() => {
 });
 
 const showFooter = computed(() => {
-  return props.showError || (props.maxLength);
+  return props.showError || props.maxLength;
 });
 
 const handleInput = (value: string | number) => {

@@ -1,23 +1,23 @@
 <template>
-<div class="logo">
-  <div class="logo__desktop">
-    <IconLogoDesktop/>
-  </div>
-  <div class="logo__mobile">
-    <div v-if="false">
-      <IconLogoMobile/>
+  <div class="logo">
+    <div class="logo__desktop">
+      <IconLogoDesktop />
     </div>
-    <div v-else>
-      <IconLogoMobileGuest/>
+    <div class="logo__mobile">
+      <div v-if="false">
+        <IconLogoMobile />
+      </div>
+      <div v-else>
+        <IconLogoMobileGuest />
+      </div>
     </div>
   </div>
-</div>
 </template>
 
 <script setup lang="ts">
-import IconLogoDesktop from "@/components/icons/IconLogoDesktop.vue";
-import IconLogoMobile from "@/components/icons/IconLogoMobile.vue";
-import IconLogoMobileGuest from "@/components/icons/IconLogoMobileGuest.vue";
+import IconLogoDesktop from '@/components/icons/IconLogoDesktop.vue';
+import IconLogoMobile from '@/components/icons/IconLogoMobile.vue';
+import IconLogoMobileGuest from '@/components/icons/IconLogoMobileGuest.vue';
 </script>
 
 <style scoped lang="scss">

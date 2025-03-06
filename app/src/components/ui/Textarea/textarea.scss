@@ -21,7 +21,8 @@
     background-color: colors.$white;
     margin-top: 8px;
 
-    &:hover, &:focus-within {
+    &:hover,
+    &:focus-within {
       outline: 2px solid colors.$green-light;
     }
   }

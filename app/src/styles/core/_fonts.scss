@@ -1,9 +1,9 @@
 $fonts: (
-        400: 'montserrat-regular',
-        500: 'montserrat-medium',
-        600: 'montserrat-semibold',
-        700: 'montserrat-bold',
-        900: 'montserrat-black'
+  400: 'montserrat-regular',
+  500: 'montserrat-medium',
+  600: 'montserrat-semibold',
+  700: 'montserrat-bold',
+  900: 'montserrat-black',
 );
 
 @each $weight, $filename in $fonts {

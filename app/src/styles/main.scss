@@ -5,7 +5,6 @@
 @use 'core/reset';
 @use 'core/scrollbar';
 
-
 * {
   font-family: typography.$font-family;
   color: colors.$white;
@@ -29,7 +28,7 @@ main {
   padding: 0 160px;
 }
 
-@media ((min-width:breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
+@media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
   main {
     padding: 0 80px;
   }
@@ -39,7 +38,7 @@ main {
     padding: 0 40px;
   }
 }
-@media (max-width:breakpoints.$breakpoint-sm-max) {
+@media (max-width: breakpoints.$breakpoint-sm-max) {
   main {
     padding: 0 20px;
   }

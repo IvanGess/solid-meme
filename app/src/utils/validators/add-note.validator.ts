@@ -1,7 +1,7 @@
 export class AddNoteValidator {
   static validate(
     title: string,
-    content: string,
+    content: string
   ): Array<{ field: string; message: string }> {
     const errors: Array<{ field: string; message: string }> = [];
 
@@ -10,7 +10,10 @@ export class AddNoteValidator {
     }
 
     if (!content.trim()) {
-      errors.push({ field: 'content', message: 'Текст заметки не может быть пустым' });
+      errors.push({
+        field: 'content',
+        message: 'Текст заметки не может быть пустым',
+      });
     }
 
     return errors;

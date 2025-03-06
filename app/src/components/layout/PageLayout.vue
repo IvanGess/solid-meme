@@ -1,8 +1,7 @@
 <template>
   <div class="page-layout">
     <header class="page-layout__header">
-      <slot name="header-logo">
-      </slot>
+      <slot name="header-logo"> </slot>
 
       <div class="right-section">
         <slot name="header-right-content"></slot>
@@ -15,9 +14,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss">
 @use '@/styles/core/colors' as colors;
@@ -39,10 +36,10 @@
     height: 136px;
     max-width: 1920px;
     min-width: 360px;
-    width: 100%
+    width: 100%;
   }
 
-  @media ((min-width:breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
+  @media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
     &__header {
       padding: 0 80px;
       height: 96px;
@@ -54,7 +51,7 @@
       height: 96px;
     }
   }
-  @media (max-width:breakpoints.$breakpoint-sm-max) {
+  @media (max-width: breakpoints.$breakpoint-sm-max) {
     &__header {
       padding: 0 20px;
       height: 96px;

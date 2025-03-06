@@ -1,10 +1,10 @@
 export interface Note {
-  id: number
-  title: string
-  content: string
+  id: number;
+  title: string;
+  content: string;
 }
 
 export interface CreateNotePayload {
-  title: string
-  content: string
+  title: string;
+  content: string;
 }

@@ -9,9 +9,8 @@
   &__text {
     color: colors.$error;
   }
-
 }
-@media (max-width:breakpoints.$breakpoint-sm-max) {
+@media (max-width: breakpoints.$breakpoint-sm-max) {
   .error-message {
     font-size: 14px;
   }

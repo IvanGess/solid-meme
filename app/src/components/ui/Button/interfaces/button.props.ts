@@ -1,6 +1,6 @@
 export interface ButtonProps {
   label?: string;
-  type?: "button" | "submit" | "reset";
+  type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   isLink?: boolean;
   to?: string;

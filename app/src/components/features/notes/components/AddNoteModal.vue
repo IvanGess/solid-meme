@@ -1,82 +1,80 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import ModalUI from '@/components/ui/Modal/ModalUI.vue'
-import ButtonUI from "@/components/ui/Button/ButtonUI.vue"
-import { useModalService, useNoteService } from '@/core/di/use-di.ts'
-import { notesConstants } from '@/components/features/notes/notes.constants.ts'
-import { AddNoteValidator } from '@/utils/validators/add-note.validator.ts'
-import FieldUI from '@/components/ui/Field/FieldUI.vue'
-import TextareaUI from '@/components/ui/Textarea/TextareaUI.vue'
+import { ref, watch } from 'vue';
+import ModalUI from '@/components/ui/Modal/ModalUI.vue';
+import ButtonUI from '@/components/ui/Button/ButtonUI.vue';
+import { useModalService, useNoteService } from '@/core/di/use-di.ts';
+import { notesConstants } from '@/components/features/notes/notes.constants.ts';
+import { AddNoteValidator } from '@/utils/validators/add-note.validator.ts';
+import FieldUI from '@/components/ui/Field/FieldUI.vue';
+import TextareaUI from '@/components/ui/Textarea/TextareaUI.vue';
 
-const emit = defineEmits(['success'])
+const emit = defineEmits(['success']);
 
-const notesService = useNoteService()
-const modalService = useModalService()
+const notesService = useNoteService();
+const modalService = useModalService();
 
-const isOpen = modalService.getState(notesConstants.modalUuid)
+const isOpen = modalService.getState(notesConstants.modalUuid);
 
 watch(isOpen, (newVal) => {
-  if (!newVal) resetForm()
-})
+  if (!newVal) resetForm();
+});
 
-const title = ref('')
-const content = ref('')
+const title = ref('');
+const content = ref('');
 
 const formErrors = ref<Record<string, string>>({
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
 });
-const errorMessage = ref('')
+const errorMessage = ref('');
 
-const isSubmitting = ref(false)
+const isSubmitting = ref(false);
 
 const validateForm = () => {
   formErrors.value = { title: '', content: '' };
 
   const validationErrors = AddNoteValidator.validate(
     title.value,
-    content.value,
+    content.value
   );
 
-  validationErrors.forEach(error => {
+  validationErrors.forEach((error) => {
     formErrors.value[error.field] = error.message;
   });
 
   return validationErrors.length === 0;
-}
-
+};
 
 const close = () => {
-  modalService.close(notesConstants.modalUuid)
-}
+  modalService.close(notesConstants.modalUuid);
+};
 
 const handleSubmit = async () => {
-  if (!validateForm() || isSubmitting.value) return
+  if (!validateForm() || isSubmitting.value) return;
 
-  isSubmitting.value = true
+  isSubmitting.value = true;
   const response = await notesService.createNote({
     title: title.value,
-    content: content.value
-  })
-  isSubmitting.value = false
+    content: content.value,
+  });
+  isSubmitting.value = false;
 
   if (response.error) {
-    errorMessage.value = response.error.messages.join(', ')
-    return
+    errorMessage.value = response.error.messages.join(', ');
+    return;
   }
 
-  emit('success')
-  close()
-}
+  emit('success');
+  close();
+};
 
 const resetForm = () => {
-  title.value = ''
-  content.value = ''
-  errorMessage.value = ''
-  isSubmitting.value = false
-}
-
+  title.value = '';
+  content.value = '';
+  errorMessage.value = '';
+  isSubmitting.value = false;
+};
 </script>
 
 <template>
@@ -131,7 +129,6 @@ const resetForm = () => {
     </template>
   </ModalUI>
 </template>
-
 
 <style lang="scss" scoped>
 @use '@/styles/core/colors' as colors;

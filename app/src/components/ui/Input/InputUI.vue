@@ -1,7 +1,10 @@
 <template>
   <div class="input">
     <label v-if="label" class="input__label">{{ label }}</label>
-    <div class="input__container" :class="{ 'input__container--password': isPassword }">
+    <div
+      class="input__container"
+      :class="{ 'input__container--password': isPassword }"
+    >
       <input
         class="input__field"
         :type="computedInputType"
@@ -10,7 +13,11 @@
         @input="handleInput"
       />
 
-      <div v-if="isPassword" class="input__icon" @click="togglePasswordVisibility">
+      <div
+        v-if="isPassword"
+        class="input__icon"
+        @click="togglePasswordVisibility"
+      >
         <component :is="showPassword ? IconOffPassword : IconOnPassword" />
       </div>
     </div>
@@ -19,9 +26,8 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import IconOffPassword from '@/components/icons/IconOffPassword.vue'
-import IconOnPassword from '@/components/icons/IconOnPassword.vue'
-
+import IconOffPassword from '@/components/icons/IconOffPassword.vue';
+import IconOnPassword from '@/components/icons/IconOnPassword.vue';
 
 interface Props {
   label?: string;
@@ -35,7 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number): void
+  (e: 'update:modelValue', value: string | number): void;
 }>();
 
 const showPassword = ref(false);

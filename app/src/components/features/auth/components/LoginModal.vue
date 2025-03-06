@@ -1,25 +1,29 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
-import ModalUI from '@/components/ui/Modal/ModalUI.vue'
-import { useRouter } from 'vue-router'
-import { useAuthService, useModalService, useUserService } from '@/core/di/use-di.ts'
-import { AuthValidator } from '@/utils/validators/auth.validator.ts'
-import ButtonUI from "@/components/ui/Button/ButtonUI.vue";
-import { authConstants } from '@/components/features/auth/auth.constants.ts'
-import FieldUI from '@/components/ui/Field/FieldUI.vue'
+import { ref, watch, computed } from 'vue';
+import ModalUI from '@/components/ui/Modal/ModalUI.vue';
+import { useRouter } from 'vue-router';
+import {
+  useAuthService,
+  useModalService,
+  useUserService,
+} from '@/core/di/use-di.ts';
+import { AuthValidator } from '@/utils/validators/auth.validator.ts';
+import ButtonUI from '@/components/ui/Button/ButtonUI.vue';
+import { authConstants } from '@/components/features/auth/auth.constants.ts';
+import FieldUI from '@/components/ui/Field/FieldUI.vue';
 
 const emit = defineEmits(['success']);
 
-const authService = useAuthService()
-const userService = useUserService()
-const router = useRouter()
-const modalService = useModalService()
+const authService = useAuthService();
+const userService = useUserService();
+const router = useRouter();
+const modalService = useModalService();
 
-const isOpen = modalService.getState(authConstants.modalUuid)
+const isOpen = modalService.getState(authConstants.modalUuid);
 
 watch(isOpen, (newVal) => {
-  if (!newVal) resetForm()
-})
+  if (!newVal) resetForm();
+});
 
 const email = ref('');
 const password = ref('');
@@ -28,25 +32,27 @@ const confirmPassword = ref('');
 const isSubmitting = ref(false);
 const isLoginForm = ref(true);
 
-const formTitle = computed(() => isLoginForm.value ? 'Вход в ваш аккаунт' : 'Регистрация');
-const switchFormText = computed(() => isLoginForm.value
-  ? 'У вас нет аккаунта? '
-  : 'У вас есть аккаунт? ');
+const formTitle = computed(() =>
+  isLoginForm.value ? 'Вход в ваш аккаунт' : 'Регистрация'
+);
+const switchFormText = computed(() =>
+  isLoginForm.value ? 'У вас нет аккаунта? ' : 'У вас есть аккаунт? '
+);
 
-const switchFormButton = computed(() => isLoginForm.value
-  ? 'Зарегистрируйтесь'
-  : 'Войдите');
+const switchFormButton = computed(() =>
+  isLoginForm.value ? 'Зарегистрируйтесь' : 'Войдите'
+);
 
 const formErrors = ref<Record<string, string>>({
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
 });
 const errorMessage = ref('');
 const clearErrors = () => {
-  errorMessage.value = ''
-  formErrors.value = { email: '', password: '', confirmPassword: '' }
-}
+  errorMessage.value = '';
+  formErrors.value = { email: '', password: '', confirmPassword: '' };
+};
 
 const validateForm = () => {
   clearErrors();
@@ -58,7 +64,7 @@ const validateForm = () => {
     isLoginForm.value
   );
 
-  validationErrors.forEach(error => {
+  validationErrors.forEach((error) => {
     formErrors.value[error.field] = error.message;
   });
 
@@ -66,13 +72,13 @@ const validateForm = () => {
 };
 
 const close = () => {
-  modalService.close(authConstants.modalUuid)
-}
+  modalService.close(authConstants.modalUuid);
+};
 const login = async () => {
   const response = await authService.login({
     email: email.value,
-    password: password.value
-  })
+    password: password.value,
+  });
 
   if (response.error) {
     errorMessage.value = response.error.messages.join(', ');
@@ -81,14 +87,14 @@ const login = async () => {
   }
 
   close();
-  emit('success')
-}
+  emit('success');
+};
 const register = async () => {
   const response = await userService.register({
     email: email.value,
     password: password.value,
-    confirm_password: confirmPassword.value
-  })
+    confirm_password: confirmPassword.value,
+  });
 
   if (response.error) {
     errorMessage.value = response.error.messages.join(', ');
@@ -96,42 +102,49 @@ const register = async () => {
     return;
   }
   close();
-  emit('success')
-  router.push('/login')
-}
+  emit('success');
+  router.push('/login');
+};
 
 const handleSubmit = () => {
   if (!validateForm() || isSubmitting.value) return;
   isSubmitting.value = true;
   errorMessage.value = '';
-  const request = isLoginForm.value ? login : register
+  const request = isLoginForm.value ? login : register;
   request();
-}
+};
 
-const passwordLabel = computed(() => isLoginForm.value ? 'Пароль' : 'Новый пароль');
-const isSubmitted = computed(() => isSubmitting.value ? 'Отправка...' : (isLoginForm.value ? 'Войти' : 'Зарегистрироваться'));
+const passwordLabel = computed(() =>
+  isLoginForm.value ? 'Пароль' : 'Новый пароль'
+);
+const isSubmitted = computed(() =>
+  isSubmitting.value
+    ? 'Отправка...'
+    : isLoginForm.value
+      ? 'Войти'
+      : 'Зарегистрироваться'
+);
 
 const clearForm = () => {
-  email.value = ''
-  password.value = ''
-  confirmPassword.value = ''
-}
+  email.value = '';
+  password.value = '';
+  confirmPassword.value = '';
+};
 
 const switchForm = () => {
   isLoginForm.value = !isLoginForm.value;
 
-  clearForm()
-  clearErrors()
+  clearForm();
+  clearErrors();
 };
 
 const resetForm = () => {
-  clearForm()
-  clearErrors()
+  clearForm();
+  clearErrors();
 
   isLoginForm.value = true;
   isSubmitting.value = false;
 };
-
 </script>
 
 <template>
@@ -162,7 +175,7 @@ const resetForm = () => {
             v-model="password"
             type="password"
             placeholder="Введите пароль"
-            :label=passwordLabel
+            :label="passwordLabel"
             :autocomplete="!isLoginForm ? 'current-password' : 'new-password'"
           />
         </div>
@@ -182,11 +195,7 @@ const resetForm = () => {
       <div class="actions-group">
         <div class="actions-group__switch-link">
           {{ switchFormText }}
-          <button
-            type="button"
-            class="switch-form"
-            @click="switchForm"
-          >
+          <button type="button" class="switch-form" @click="switchForm">
             {{ switchFormButton }}
           </button>
         </div>
@@ -233,7 +242,6 @@ $primary-color: #2563eb;
 }
 
 .form-group {
-
   &__wrapper {
     display: flex;
     flex-direction: column;
@@ -303,7 +311,7 @@ $primary-color: #2563eb;
     cursor: not-allowed;
   }
 }
-@media (max-width:breakpoints.$breakpoint-sm-max) {
+@media (max-width: breakpoints.$breakpoint-sm-max) {
   .form-group {
     &__wrapper {
       gap: 8px;

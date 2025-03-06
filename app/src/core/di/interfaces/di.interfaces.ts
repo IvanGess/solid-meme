@@ -7,15 +7,15 @@ import {
   AUTH_SERVICE,
   USER_SERVICE,
   NOTES_SERVICE,
-} from '@/core/di/di-symbols.ts'
+} from '@/core/di/di-symbols.ts';
 import type { AuthApiService } from '@/api/auth/auth.api.ts';
-import type { HttpClient } from '@/core/http-client/http-client.ts'
-import type { ModalService } from '@/services/modal.service.ts'
-import type { UserApiService } from '@/api/user/user.api.ts'
-import type { NotesApiService } from '@/api/notes/notes.api.ts'
-import type { AuthService } from '@/services/auth.service.ts'
-import type { UserService } from '@/services/user.service.ts'
-import type { NotesService } from '@/services/notes.service.ts'
+import type { HttpClient } from '@/core/http-client/http-client.ts';
+import type { ModalService } from '@/services/modal.service.ts';
+import type { UserApiService } from '@/api/user/user.api.ts';
+import type { NotesApiService } from '@/api/notes/notes.api.ts';
+import type { AuthService } from '@/services/auth.service.ts';
+import type { UserService } from '@/services/user.service.ts';
+import type { NotesService } from '@/services/notes.service.ts';
 export interface Container {
   [key: symbol]: unknown;
   [HTTP_CLIENT]?: HttpClient;

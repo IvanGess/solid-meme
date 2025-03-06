@@ -1,3 +1,3 @@
 export const notesConstants = {
-  modalUuid: 'modal::add-note'
-}
+  modalUuid: 'modal::add-note',
+};

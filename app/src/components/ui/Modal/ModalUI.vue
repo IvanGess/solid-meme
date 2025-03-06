@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted } from 'vue'
-import { useModalService } from '@/core/di/use-di.ts'
-import ButtonUI from '@/components/ui/Button/ButtonUI.vue'
-import IconClose from '@/components/icons/IconClose.vue'
-import type { ModalProps } from '@/components/ui/Modal/interfaces/modal.props.ts'
+import { ref, watch, onMounted, onUnmounted } from 'vue';
+import { useModalService } from '@/core/di/use-di.ts';
+import ButtonUI from '@/components/ui/Button/ButtonUI.vue';
+import IconClose from '@/components/icons/IconClose.vue';
+import type { ModalProps } from '@/components/ui/Modal/interfaces/modal.props.ts';
 
-const props = defineProps<ModalProps>()
+const props = defineProps<ModalProps>();
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['close']);
 
-const modalService = useModalService()
-const dialog = ref<HTMLDialogElement | null>(null)
-const isOpen = modalService.getState(props.modalId)
+const modalService = useModalService();
+const dialog = ref<HTMLDialogElement | null>(null);
+const isOpen = modalService.getState(props.modalId);
 
-onMounted(() => modalService.register(props.modalId))
-onUnmounted(() => modalService.unregister(props.modalId))
+onMounted(() => modalService.register(props.modalId));
+onUnmounted(() => modalService.unregister(props.modalId));
 
 watch(isOpen, (newVal) => {
   if (newVal) {
-    dialog.value?.showModal()
-    document.body.style.overflow = 'hidden'
+    dialog.value?.showModal();
+    document.body.style.overflow = 'hidden';
   } else {
-    dialog.value?.close()
-    document.body.style.overflow = ''
-    emit('close')
+    dialog.value?.close();
+    document.body.style.overflow = '';
+    emit('close');
   }
-})
+});
 
 const handleClose = () => {
-  modalService.close(props.modalId)
-  emit('close')
-}
+  modalService.close(props.modalId);
+  emit('close');
+};
 </script>
 
 <template>
@@ -43,7 +43,7 @@ const handleClose = () => {
     <div class="modal-content">
       <ButtonUI @click="handleClose" class="modal-button__close">
         <template #appendIcon>
-          <IconClose/>
+          <IconClose />
         </template>
       </ButtonUI>
 
@@ -110,7 +110,6 @@ $transition-speed: 0.3s;
 }
 
 .modal-header {
-
   h3 {
     margin: 0;
     font-weight: 600;
@@ -144,7 +143,9 @@ $transition-speed: 0.3s;
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform $transition-speed ease, opacity $transition-speed ease;
+  transition:
+    transform $transition-speed ease,
+    opacity $transition-speed ease;
 }
 
 .slide-enter-from,
@@ -153,7 +154,7 @@ $transition-speed: 0.3s;
   opacity: 0;
 }
 
-@media ((min-width:breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
+@media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
   .modal-content {
     max-width: 594px;
     padding: 58px;
@@ -162,7 +163,6 @@ $transition-speed: 0.3s;
     h3 {
       text-wrap: auto;
     }
-
   }
   .actions-group {
     &__switch-link {
@@ -175,20 +175,20 @@ $transition-speed: 0.3s;
     padding: 58px;
   }
 }
-@media (max-width:breakpoints.$breakpoint-sm-max) {
+@media (max-width: breakpoints.$breakpoint-sm-max) {
   .modal-content {
     padding: 90px 18px;
     width: 98%;
     height: 98%;
   }
-.modal-header {
-  h3 {
-    font-weight: 600;
-    font-size: 32px;
-    line-height: 112%;
-    text-wrap: auto;
+  .modal-header {
+    h3 {
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 112%;
+      text-wrap: auto;
+    }
   }
-}
 
   .modal-button {
     &__close {

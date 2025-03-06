@@ -1,3 +1,3 @@
 export const authConstants = {
-  modalUuid: 'modal::login-or-register'
-}
+  modalUuid: 'modal::login-or-register',
+};

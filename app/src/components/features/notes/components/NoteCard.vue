@@ -6,18 +6,17 @@
     <div class="note__content">
       <div class="note__content--text">{{ content }}</div>
       <div class="note__content--btn-wrapper">
-        <IconClose/>
-        <button  class="note__content--btn" @click="$emit('delete')">
+        <IconClose />
+        <button class="note__content--btn" @click="$emit('delete')">
           Удалить
         </button>
       </div>
-
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import IconClose from "@/components/icons/IconClose.vue";
+import IconClose from '@/components/icons/IconClose.vue';
 
 defineProps<{
   title: string;
@@ -42,7 +41,13 @@ defineEmits<{
     background: colors.$green-light;
     border-radius: 12px 0 0 0;
     border-bottom: 1px solid colors.$green;
-    clip-path: polygon(0px 0px, calc(100% - 2.5rem) 0px, 100% 2.5rem, 100% 101%, 0% 101%);
+    clip-path: polygon(
+      0px 0px,
+      calc(100% - 2.5rem) 0px,
+      100% 2.5rem,
+      100% 101%,
+      0% 101%
+    );
     padding: 20px 28px;
 
     &::after {

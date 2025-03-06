@@ -1,53 +1,51 @@
 <script setup lang="ts">
-import NoteList from '@/components/features/notes/components/NoteList.vue'
-import { useModalService, useNoteService } from '@/core/di/use-di.ts'
-import { onMounted, ref } from 'vue'
-import type { Note } from '@/api/notes/notes.interfaces.ts'
-import ButtonUI from '@/components/ui/Button/ButtonUI.vue'
-import IconAdd from '@/components/icons/IconAdd.vue'
-import AddNoteModal from '@/components/features/notes/components/AddNoteModal.vue'
-import { notesConstants } from '@/components/features/notes/notes.constants.ts'
+import NoteList from '@/components/features/notes/components/NoteList.vue';
+import { useModalService, useNoteService } from '@/core/di/use-di.ts';
+import { onMounted, ref } from 'vue';
+import type { Note } from '@/api/notes/notes.interfaces.ts';
+import ButtonUI from '@/components/ui/Button/ButtonUI.vue';
+import IconAdd from '@/components/icons/IconAdd.vue';
+import AddNoteModal from '@/components/features/notes/components/AddNoteModal.vue';
+import { notesConstants } from '@/components/features/notes/notes.constants.ts';
 
 const notesService = useNoteService();
-const modalService = useModalService()
+const modalService = useModalService();
 
-const notes = ref<Note[]>([])
-const isLoading = ref(false)
-const error = ref<string | null>(null)
-
+const notes = ref<Note[]>([]);
+const isLoading = ref(false);
+const error = ref<string | null>(null);
 
 onMounted(() => {
-  fetchNotes()
-})
+  fetchNotes();
+});
 
 const fetchNotes = async () => {
-  isLoading.value = true
-  error.value = null
+  isLoading.value = true;
+  error.value = null;
 
-  const { data, error: fetchError } = await notesService.getList()
+  const { data, error: fetchError } = await notesService.getList();
 
   if (fetchError) {
-    error.value = fetchError.message
+    error.value = fetchError.message;
     return;
   }
 
-  notes.value = data || []
-  isLoading.value = false
-}
+  notes.value = data || [];
+  isLoading.value = false;
+};
 const openAddNoteModal = () => {
-  modalService.open(notesConstants.modalUuid)
-}
+  modalService.open(notesConstants.modalUuid);
+};
 const handleDeleteNote = async (id: number) => {
-  const { error: deleteError } = await notesService.deleteNote(id)
+  const { error: deleteError } = await notesService.deleteNote(id);
 
   if (deleteError) {
-    error.value = deleteError.message
-    return
+    error.value = deleteError.message;
+    return;
   }
 
-  await fetchNotes()
-}
-
+  await fetchNotes();
+};
 </script>
 
 <template>
@@ -56,9 +54,7 @@ const handleDeleteNote = async (id: number) => {
       Загружаем заметки...
     </div>
 
-    <div v-if="error" class="error-state">
-      Ошибка: {{ error }}
-    </div>
+    <div v-if="error" class="error-state">Ошибка: {{ error }}</div>
 
     <NoteList
       v-if="!isLoading && !error"
@@ -66,14 +62,13 @@ const handleDeleteNote = async (id: number) => {
       @delete="handleDeleteNote"
     />
 
-
     <ButtonUI
       v-if="!isLoading && !error"
       class="floating-button"
       @click="openAddNoteModal"
     >
       <template #appendIcon>
-        <IconAdd/>
+        <IconAdd />
       </template>
     </ButtonUI>
     <AddNoteModal @success="fetchNotes" />
@@ -124,7 +119,7 @@ const handleDeleteNote = async (id: number) => {
   }
 }
 
-@media ((min-width:breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
+@media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
   .container {
     padding: 40px 0;
   }
@@ -142,7 +137,7 @@ const handleDeleteNote = async (id: number) => {
     right: 25px;
   }
 }
-@media (max-width:breakpoints.$breakpoint-sm-max) {
+@media (max-width: breakpoints.$breakpoint-sm-max) {
   .container {
     padding: 20px 0;
   }

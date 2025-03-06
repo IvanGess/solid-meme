@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { computed } from 'vue'
-import type { ButtonProps } from '@/components/ui/Button/interfaces/button.props.ts'
+import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+import type { ButtonProps } from '@/components/ui/Button/interfaces/button.props.ts';
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  type: "button",
+  type: 'button',
   disabled: false,
 });
 
-const emit = defineEmits(["click"]);
-const router = useRouter()
+const emit = defineEmits(['click']);
+const router = useRouter();
 
 const hasLabel = computed(() => {
-  return props.label
+  return props.label;
 });
 
 async function handleClick(event: Event) {
-  emit("click", event);
+  emit('click', event);
 
   if (props.isLink && props.to) {
-      await router.push(props.to);
+    await router.push(props.to);
   }
 }
 </script>
 
 <style scoped>
-@import url("./button.scss");
+@import url('./button.scss');
 </style>
 <template>
   <button

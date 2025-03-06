@@ -1,17 +1,17 @@
 <template>
-    <div class="content-wrapper">
-      <div class="text-content">
-        <h1 class="main-heading">Мои<br>заметки</h1>
-        <p class="subheading">Не забывай о важном, храни его в облаке.</p>
-      </div>
-      <div class="image-wrapper">
-        <img
-          src="@/assets/hero-image.svg"
-          alt="Иллюстрация заметок в облаке"
-          class="hero-image"
-        >
-      </div>
+  <div class="content-wrapper">
+    <div class="text-content">
+      <h1 class="main-heading">Мои<br />заметки</h1>
+      <p class="subheading">Не забывай о важном, храни его в облаке.</p>
     </div>
+    <div class="image-wrapper">
+      <img
+        src="@/assets/hero-image.svg"
+        alt="Иллюстрация заметок в облаке"
+        class="hero-image"
+      />
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -22,7 +22,6 @@
   display: flex;
   align-items: center;
   gap: 60px;
-
 
   .text-content {
     max-width: 642px;
@@ -41,31 +40,31 @@
   }
 }
 
-@media ((min-width:breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
+@media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
   .content-wrapper {
     gap: 40px;
   }
 }
 @media ((min-width: breakpoints.$breakpoint-sm-max) and (max-width: breakpoints.$breakpoint-md-max)) {
-.content-wrapper {
-  flex-direction: column;
-  gap: 0;
-   .text-content {
-     margin-top: 38px;
-     align-items: center;
-     text-align: center;
-     gap: 22px;
-     .subheading {
-       max-width: 100%;
-       text-wrap: auto;
-     }
-   }
-}
+  .content-wrapper {
+    flex-direction: column;
+    gap: 0;
+    .text-content {
+      margin-top: 38px;
+      align-items: center;
+      text-align: center;
+      gap: 22px;
+      .subheading {
+        max-width: 100%;
+        text-wrap: auto;
+      }
+    }
+  }
   .image-wrapper {
     padding: 0 64px;
   }
 }
-@media (max-width:breakpoints.$breakpoint-sm-max) {
+@media (max-width: breakpoints.$breakpoint-sm-max) {
   .content-wrapper {
     flex-direction: column;
     gap: 12px;

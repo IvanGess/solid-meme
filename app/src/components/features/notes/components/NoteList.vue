@@ -11,8 +11,8 @@
 </template>
 
 <script setup lang="ts">
-import NoteCard from '@/components/features/notes/components/NoteCard.vue'
-import type { Note } from '@/api/notes/notes.interfaces.ts'
+import NoteCard from '@/components/features/notes/components/NoteCard.vue';
+import type { Note } from '@/api/notes/notes.interfaces.ts';
 
 defineProps<{
   notes: Note[];

@@ -5,7 +5,7 @@ export class HttpError extends Error {
     public readonly messages: string[],
     public readonly response?: Response
   ) {
-    super(messages.join(', '))
-    Object.setPrototypeOf(this, HttpError.prototype)
+    super(messages.join(', '));
+    Object.setPrototypeOf(this, HttpError.prototype);
   }
 }

@@ -7,14 +7,11 @@
 </template>
 
 <script setup lang="ts">
-
-import type {
-  ErrorMessageProps
-} from '@/components/ui/ErrorMessage/interfaces/errorMessage.props.ts'
+import type { ErrorMessageProps } from '@/components/ui/ErrorMessage/interfaces/errorMessage.props.ts';
 
 defineProps<ErrorMessageProps>();
 </script>
 
 <style lang="scss" scoped>
-@import url("./error.scss");
+@import url('./error.scss');
 </style>
