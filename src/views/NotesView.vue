@@ -1,3 +1,42 @@
+<template>
+  <main class="container" aria-labelledby="notes-heading">
+    <h1 id="notes-heading" class="visually-hidden">Мои заметки</h1>
+
+    <div
+      v-if="isLoading && !error"
+      class="loading-state"
+      role="status"
+      aria-live="polite"
+    >
+      Загружаем заметки...
+    </div>
+
+    <div v-if="error" class="error-state" role="alert" aria-live="assertive">
+      Ошибка: {{ error }}
+    </div>
+
+    <NoteList
+      v-if="!isLoading && !error"
+      :notes="notes"
+      @delete="handleDeleteNote"
+      aria-labelledby="notes-heading"
+    />
+
+    <ButtonUI
+      v-if="!isLoading && !error"
+      class="floating-button"
+      @click="openAddNoteModal"
+      aria-label="Добавить заметку"
+    >
+      <template #appendIcon>
+        <IconAdd aria-hidden="true" />
+      </template>
+    </ButtonUI>
+
+    <AddNoteModal @success="fetchNotes" />
+  </main>
+</template>
+
 <script setup lang="ts">
 import NoteList from '@/components/features/notes/components/NoteList.vue';
 import { useModalService, useNoteService } from '@/core/di/use-di.ts';
@@ -33,9 +72,11 @@ const fetchNotes = async () => {
   notes.value = data || [];
   isLoading.value = false;
 };
+
 const openAddNoteModal = () => {
   modalService.open(notesConstants.modalUuid);
 };
+
 const handleDeleteNote = async (id: number) => {
   const { error: deleteError } = await notesService.deleteNote(id);
 
@@ -47,33 +88,6 @@ const handleDeleteNote = async (id: number) => {
   await fetchNotes();
 };
 </script>
-
-<template>
-  <div class="container">
-    <div v-if="isLoading && !error" class="loading-state">
-      Загружаем заметки...
-    </div>
-
-    <div v-if="error" class="error-state">Ошибка: {{ error }}</div>
-
-    <NoteList
-      v-if="!isLoading && !error"
-      :notes="notes"
-      @delete="handleDeleteNote"
-    />
-
-    <ButtonUI
-      v-if="!isLoading && !error"
-      class="floating-button"
-      @click="openAddNoteModal"
-    >
-      <template #appendIcon>
-        <IconAdd />
-      </template>
-    </ButtonUI>
-    <AddNoteModal @success="fetchNotes" />
-  </div>
-</template>
 
 <style scoped lang="scss">
 @use '@/styles/core/breakpoints' as breakpoints;
@@ -108,14 +122,20 @@ const handleDeleteNote = async (id: number) => {
   right: 40px;
   transition: all 0.3s ease;
   z-index: 1000;
-  box-shadow: 0 15px 46px -10px rgba(0, 0, 0, 0.6);
 
   &:hover {
+    background-color: #1976d2;
     transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
   }
 
   &:active {
     transform: scale(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid #1976d2;
+    outline-offset: 2px;
   }
 }
 
@@ -123,27 +143,43 @@ const handleDeleteNote = async (id: number) => {
   .container {
     padding: 40px 0;
   }
+
   .floating-button {
     bottom: 30px;
     right: 30px;
   }
 }
+
 @media ((min-width: breakpoints.$breakpoint-sm-max) and (max-width: breakpoints.$breakpoint-md-max)) {
   .container {
     padding: 40px 0;
   }
+
   .floating-button {
     bottom: 25px;
     right: 25px;
   }
 }
+
 @media (max-width: breakpoints.$breakpoint-sm-max) {
   .container {
     padding: 20px 0;
   }
+
   .floating-button {
     bottom: 20px;
     right: 20px;
   }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 </style>

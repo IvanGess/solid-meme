@@ -59,6 +59,7 @@ const handleInput = (event: Event) => {
       border-radius: 36px;
       padding: 16px;
       color: colors.$dark;
+      margin-top: 8px;
     }
   }
 }

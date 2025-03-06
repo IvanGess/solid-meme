@@ -1,7 +1,6 @@
 import {
   createRouter,
   createWebHistory,
-  type NavigationGuardWithThis,
   type RouteLocationNormalizedGeneric,
 } from 'vue-router';
 import type { AuthService } from '@/services/auth.service.ts';

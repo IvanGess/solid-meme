@@ -1,3 +1,72 @@
+<template>
+  <ModalUI
+    :modal-id="authConstants.modalUuid"
+    :header="formTitle"
+    @close="resetForm"
+  >
+    <template #content>
+      <form @submit.prevent="handleSubmit" class="form-group__wrapper">
+        <div class="form-group">
+          <FieldUI
+            :error-message="formErrors.email"
+            :show-error="true"
+            v-model="email"
+            type="email"
+            placeholder="Введите значение"
+            label="Email"
+            :required="true"
+            autocomplete="username"
+          />
+        </div>
+
+        <div class="form-group">
+          <FieldUI
+            :show-error="true"
+            :error-message="formErrors.password"
+            v-model="password"
+            type="password"
+            placeholder="Введите пароль"
+            :label="passwordLabel"
+            :autocomplete="!isLoginForm ? 'current-password' : 'new-password'"
+          />
+        </div>
+
+        <div v-if="!isLoginForm" class="form-group">
+          <FieldUI
+            v-model="confirmPassword"
+            type="password"
+            placeholder="Ввод"
+            label="Пароль ещё раз"
+          />
+        </div>
+      </form>
+    </template>
+
+    <template #actions>
+      <div class="actions-group">
+        <div class="actions-group__switch-link">
+          {{ switchFormText }}
+          <button type="button" class="switch-form" @click="switchForm">
+            {{ switchFormButton }}
+          </button>
+        </div>
+
+        <ButtonUI
+          type="submit"
+          :label="isSubmitted"
+          class="submit-button"
+          :disabled="isSubmitting"
+          @click="handleSubmit"
+        />
+      </div>
+
+      <div v-if="errorMessage" class="message-error">
+        {{ errorMessage }}
+      </div>
+    </template>
+  </ModalUI>
+</template>
+
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 import ModalUI from '@/components/ui/Modal/ModalUI.vue';
@@ -146,75 +215,6 @@ const resetForm = () => {
   isSubmitting.value = false;
 };
 </script>
-
-<template>
-  <ModalUI
-    :modal-id="authConstants.modalUuid"
-    :header="formTitle"
-    @close="resetForm"
-  >
-    <template #content>
-      <form @submit.prevent="handleSubmit" class="form-group__wrapper">
-        <div class="form-group">
-          <FieldUI
-            :error-message="formErrors.email"
-            :show-error="true"
-            v-model="email"
-            type="email"
-            placeholder="Введите значение"
-            label="Email"
-            :required="true"
-            autocomplete="username"
-          />
-        </div>
-
-        <div class="form-group">
-          <FieldUI
-            :show-error="true"
-            :error-message="formErrors.password"
-            v-model="password"
-            type="password"
-            placeholder="Введите пароль"
-            :label="passwordLabel"
-            :autocomplete="!isLoginForm ? 'current-password' : 'new-password'"
-          />
-        </div>
-
-        <div v-if="!isLoginForm" class="form-group">
-          <FieldUI
-            v-model="confirmPassword"
-            type="password"
-            placeholder="Ввод"
-            label="Пароль ещё раз"
-          />
-        </div>
-      </form>
-    </template>
-
-    <template #actions>
-      <div class="actions-group">
-        <div class="actions-group__switch-link">
-          {{ switchFormText }}
-          <button type="button" class="switch-form" @click="switchForm">
-            {{ switchFormButton }}
-          </button>
-        </div>
-
-        <ButtonUI
-          type="submit"
-          :label="isSubmitted"
-          class="submit-button"
-          :disabled="isSubmitting"
-          @click="handleSubmit"
-        />
-      </div>
-
-      <div v-if="errorMessage" class="message-error">
-        {{ errorMessage }}
-      </div>
-    </template>
-  </ModalUI>
-</template>
 
 <style lang="scss">
 @use '@/styles/core/colors' as colors;

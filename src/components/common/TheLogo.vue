@@ -1,15 +1,15 @@
 <template>
-  <div class="logo">
-    <div class="logo__desktop">
+  <div class="logo" role="img" aria-label="Логотип приложения">
+    <div class="logo__desktop" aria-hidden="true">
       <IconLogoDesktop />
     </div>
-    <div class="logo__mobile">
-      <div v-if="false">
-        <IconLogoMobile />
-      </div>
-      <div v-else>
+    <div class="logo__mobile" aria-hidden="true">
+      <template v-if="false">
         <IconLogoMobileGuest />
-      </div>
+      </template>
+      <template v-else>
+        <IconLogoMobile />
+      </template>
     </div>
   </div>
 </template>

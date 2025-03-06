@@ -1,17 +1,21 @@
 <template>
-  <div class="content-wrapper">
+  <section class="content-wrapper" aria-labelledby="main-heading">
     <div class="text-content">
-      <h1 class="main-heading">Мои<br />заметки</h1>
+      <h1 id="main-heading" class="main-heading">Мои<br />заметки</h1>
       <p class="subheading">Не забывай о важном, храни его в облаке.</p>
     </div>
-    <div class="image-wrapper">
+    <figure class="image-wrapper">
       <img
         src="@/assets/hero-image.svg"
         alt="Иллюстрация заметок в облаке"
         class="hero-image"
+        loading="lazy"
       />
-    </div>
-  </div>
+      <figcaption class="visually-hidden">
+        Иллюстрация, показывающая заметки, хранящиеся в облаке.
+      </figcaption>
+    </figure>
+  </section>
 </template>
 
 <style scoped lang="scss">
@@ -40,6 +44,17 @@
   }
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 @media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
   .content-wrapper {
     gap: 40px;
@@ -61,7 +76,7 @@
     }
   }
   .image-wrapper {
-    padding: 0 64px;
+    padding: 0px 64px;
   }
 }
 @media (max-width: breakpoints.$breakpoint-sm-max) {
