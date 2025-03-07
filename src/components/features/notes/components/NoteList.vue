@@ -1,5 +1,5 @@
 <template>
-  <div class="note-card-list">
+  <div class="note-card-list" aria-label="Список заметок">
     <NoteCard
       v-for="note in notes"
       :key="note.id"

@@ -7,18 +7,16 @@
       <UserAuthContent />
     </template>
     <template #main>
-      <main>
-        <RouterView v-slot="{ Component, route }">
-          <Transition name="fade" mode="out-in">
-            <component
-              :is="Component"
-              :key="route.path"
-              role="main"
-              aria-labelledby="page-title"
-            />
-          </Transition>
-        </RouterView>
-      </main>
+      <RouterView v-slot="{ Component, route }">
+        <Transition name="fade" mode="out-in">
+          <component
+            :is="Component"
+            :key="route.path"
+            role="main"
+            aria-labelledby="page-title"
+          />
+        </Transition>
+      </RouterView>
     </template>
   </PageLayout>
 </template>

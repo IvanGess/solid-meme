@@ -1,20 +1,15 @@
 <template>
   <div class="page-layout">
-    <header class="page-layout__header">
-      <slot name="header-logo"> </slot>
+    <header class="page-layout__header" role="banner">
+      <slot name="header-logo"></slot>
 
-      <div class="right-section">
+      <div class="right-section" aria-label="Дополнительные элементы">
         <slot name="header-right-content"></slot>
       </div>
     </header>
-
-    <slot name="main">
-      <div></div>
-    </slot>
+    <slot name="main"></slot>
   </div>
 </template>
-
-<script setup lang="ts"></script>
 
 <style lang="scss">
 @use '@/styles/core/colors' as colors;

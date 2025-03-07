@@ -1,3 +1,68 @@
+<template>
+  <ModalUI
+    :modal-id="notesConstants.modalUuid"
+    header="Добавление заметки"
+    @close="resetForm"
+    role="dialog"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+  >
+    <template #content>
+      <form @submit.prevent="handleSubmit" aria-label="Форма добавления заметки">
+        <div class="form-group">
+          <FieldUI
+            :max-length="100"
+            :value-length="title.length"
+            :error-message="formErrors.title"
+            :show-error="true"
+            v-model="title"
+            type="text"
+            placeholder="Введите заголовок"
+            label="Заголовок"
+            aria-describedby="title-error"
+          />
+          <span id="title-error" class="sr-only" v-if="formErrors.title">
+            {{ formErrors.title }}
+          </span>
+        </div>
+
+        <div class="form-group">
+          <FieldUI
+            :component="TextareaUI"
+            v-model="content"
+            :max-length="500"
+            :value-length="content.length"
+            :error-message="formErrors.content"
+            :show-error="true"
+            :is-textarea="true"
+            placeholder="Введите содержание заметки"
+            label="Содержание"
+            aria-describedby="content-error"
+          />
+          <span id="content-error" class="sr-only" v-if="formErrors.content">
+            {{ formErrors.content }}
+          </span>
+        </div>
+      </form>
+    </template>
+
+    <template #actions>
+      <div class="actions-group">
+        <ButtonUI
+          :label="isSubmitting ? 'Добавление...' : 'Добавить'"
+          :disabled="isSubmitting"
+          @click="handleSubmit"
+          aria-label="Добавить заметку"
+        />
+      </div>
+
+      <div v-if="errorMessage" class="error-message" role="alert" aria-live="assertive">
+        {{ errorMessage }}
+      </div>
+    </template>
+  </ModalUI>
+</template>
+
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import ModalUI from '@/components/ui/Modal/ModalUI.vue';
@@ -77,59 +142,6 @@ const resetForm = () => {
 };
 </script>
 
-<template>
-  <ModalUI
-    :modal-id="notesConstants.modalUuid"
-    header="Добавление заметки"
-    @close="resetForm"
-  >
-    <template #content>
-      <form @submit.prevent="handleSubmit">
-        <div class="form-group">
-          <FieldUI
-            :max-length="100"
-            :value-length="title.length"
-            :error-message="formErrors.title"
-            :show-error="true"
-            v-model="title"
-            type="text"
-            placeholder="Введите заголовок"
-            label="Заголовок"
-          />
-        </div>
-
-        <div class="form-group">
-          <FieldUI
-            :component="TextareaUI"
-            v-model="content"
-            :max-length="500"
-            :value-length="content.length"
-            :error-message="formErrors.content"
-            :show-error="true"
-            :is-textarea="true"
-            placeholder="Введите содержание заметки"
-            label="Содержание"
-          />
-        </div>
-      </form>
-    </template>
-
-    <template #actions>
-      <div class="actions-group">
-        <ButtonUI
-          :label="isSubmitting ? 'добавление...' : 'Добавить'"
-          :disabled="isSubmitting"
-          @click="handleSubmit"
-        />
-      </div>
-
-      <div v-if="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-    </template>
-  </ModalUI>
-</template>
-
 <style lang="scss" scoped>
 @use '@/styles/core/colors' as colors;
 $primary-color: #2563eb;
@@ -159,5 +171,16 @@ $error-color: #dc2626;
   padding: 0.5rem;
   background: rgba($error-color, 0.05);
   border-radius: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 </style>

@@ -1,3 +1,38 @@
+<template>
+  <dialog
+    ref="dialog"
+    class="modal"
+    @click="(e) => e.target === dialog && handleClose()"
+    @close="handleClose"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
+  >
+    <div class="modal__content">
+      <ButtonUI
+        @click="handleClose"
+        class="modal-button__close"
+        aria-label="Закрыть модальное окно"
+      >
+        <template #appendIcon>
+          <IconClose />
+        </template>
+      </ButtonUI>
+
+      <div class="modal__header">
+        <h3>{{ header }}</h3>
+      </div>
+
+      <div class="modal__body">
+        <slot name="content" />
+      </div>
+
+      <div class="modal__footer">
+        <slot name="actions" />
+      </div>
+    </div>
+  </dialog>
+</template>
+
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted } from 'vue';
 import { useModalService } from '@/core/di/use-di.ts';
@@ -33,34 +68,6 @@ const handleClose = () => {
 };
 </script>
 
-<template>
-  <dialog
-    ref="dialog"
-    class="modal"
-    @click="(e) => e.target === dialog && handleClose()"
-    @close="handleClose"
-  >
-    <div class="modal-content">
-      <ButtonUI @click="handleClose" class="modal-button__close">
-        <template #appendIcon>
-          <IconClose />
-        </template>
-      </ButtonUI>
-
-      <div class="modal-header">
-        <h3>{{ header }}</h3>
-      </div>
-
-      <div class="modal-body">
-        <slot name="content" />
-      </div>
-
-      <div class="modal-footer">
-        <slot name="actions" />
-      </div>
-    </div>
-  </dialog>
-</template>
 <style lang="scss">
 @use '@/styles/core/colors' as colors;
 @use '@/styles/core/breakpoints' as breakpoints;
@@ -76,6 +83,32 @@ $transition-speed: 0.3s;
   max-width: 95vw;
   width: 100%;
 
+  &__body {
+    margin: 40px 0 30px;
+  }
+
+  &__content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 780px;
+    background-color: colors.$dark-middle;
+    border-radius: 40px;
+    z-index: 1000;
+    padding: 80px;
+  }
+
+  &__header {
+    h3 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 48px;
+      line-height: 150%;
+    }
+  }
+
   &::backdrop {
     background: $background-overlay;
     opacity: 0.7;
@@ -84,37 +117,11 @@ $transition-speed: 0.3s;
   }
 }
 
-.modal-body {
-  margin: 40px 0 30px;
-}
-
 .modal-button {
   &__close {
     position: absolute;
     top: 20px;
     right: 20px;
-  }
-}
-
-.modal-content {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 780px;
-  background-color: colors.$dark-middle;
-  border-radius: 40px;
-  z-index: 1000;
-  padding: 80px;
-}
-
-.modal-header {
-  h3 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 48px;
-    line-height: 150%;
   }
 }
 
@@ -155,15 +162,18 @@ $transition-speed: 0.3s;
 }
 
 @media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
-  .modal-content {
-    max-width: 594px;
-    padding: 58px;
-  }
-  .modal-header {
-    h3 {
-      text-wrap: auto;
+  .modal {
+    &__content {
+      max-width: 594px;
+      padding: 58px;
+    }
+    &__header {
+      h3 {
+        text-wrap: auto;
+      }
     }
   }
+
   .actions-group {
     &__switch-link {
       flex-direction: column;
@@ -171,34 +181,38 @@ $transition-speed: 0.3s;
   }
 }
 @media ((min-width: breakpoints.$breakpoint-sm-max) and (max-width: breakpoints.$breakpoint-md-max)) {
-  .modal-content {
-    padding: 58px;
+  .modal {
+    &__content {
+      padding: 58px;
+    }
   }
 }
 @media (max-width: breakpoints.$breakpoint-sm-max) {
-  .modal-content {
-    padding: 90px 18px;
-    width: 98%;
-    height: 98%;
-  }
-  .modal-header {
-    h3 {
-      font-weight: 600;
-      font-size: 32px;
-      line-height: 112%;
-      text-wrap: auto;
+  .modal {
+    &__content {
+      padding: 90px 18px;
+      width: 98%;
+      height: 98%;
+    }
+    &__header {
+      h3 {
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 112%;
+        text-wrap: auto;
+      }
+    }
+    &__body {
+      margin: 26px 0 20px;
     }
   }
+
 
   .modal-button {
     &__close {
       top: 12px;
       right: 12px;
     }
-  }
-
-  .modal-body {
-    margin: 26px 0 20px;
   }
 
   .actions-group {

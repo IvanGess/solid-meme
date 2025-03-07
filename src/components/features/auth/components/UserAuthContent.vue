@@ -1,3 +1,33 @@
+<template>
+  <ButtonUI
+    v-if="!isAuth"
+    label="Вход"
+    @click="openLoginModal"
+    aria-label="Войти в систему"
+  >
+
+  <template #prependIcon>
+      <IconLogin aria-hidden="true" />
+    </template>
+  </ButtonUI>
+  <div class="user-menu" v-else>
+    <span v-if="currentUser">
+      {{ currentUser.email }}
+    </span>
+    <TooltipUI position="bottom">
+      <template #trigger>
+        <IconUser
+          class="user-menu--icon"  />
+      </template>
+      <div class="logout-wrapper">
+        <a href="#" class="logout-link" @click.prevent="logout"> Выйти </a>
+      </div>
+    </TooltipUI>
+  </div>
+
+  <LoginModal @success="onLoginSuccess" />
+</template>
+
 <script setup lang="ts">
 import IconLogin from '@/components/icons/IconLogin.vue';
 import ButtonUI from '@/components/ui/Button/ButtonUI.vue';
@@ -33,28 +63,7 @@ const logout = async () => {
   router.push('/login');
 };
 </script>
-<template>
-  <ButtonUI v-if="!isAuth" label="Вход" @click="openLoginModal">
-    <template #prependIcon>
-      <IconLogin />
-    </template>
-  </ButtonUI>
-  <div class="user-menu" v-else>
-    <span v-if="currentUser">
-      {{ currentUser.email }}
-    </span>
-    <TooltipUI position="bottom">
-      <template #trigger>
-        <IconUser class="user-menu--icon" />
-      </template>
-      <div class="logout-wrapper">
-        <a href="#" class="logout-link" @click.prevent="logout"> Выйти </a>
-      </div>
-    </TooltipUI>
-  </div>
 
-  <LoginModal @success="onLoginSuccess" />
-</template>
 <style lang="scss" scoped>
 @use '@/styles/core/colors' as colors;
 @use '@/styles/core/typography' as typography;

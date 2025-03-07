@@ -3,9 +3,12 @@
     :modal-id="authConstants.modalUuid"
     :header="formTitle"
     @close="resetForm"
+    role="dialog"
+    aria-labelledby="modal-title"
+    aria-describedby="modal-description"
   >
     <template #content>
-      <form @submit.prevent="handleSubmit" class="form-group__wrapper">
+      <form @submit.prevent="handleSubmit" class="form-group__wrapper" aria-label="Форма авторизации">
         <div class="form-group">
           <FieldUI
             :error-message="formErrors.email"
@@ -16,7 +19,9 @@
             label="Email"
             :required="true"
             autocomplete="username"
+            aria-describedby="email-error"
           />
+          <span id="email-error" class="sr-only" v-if="formErrors.email">{{ formErrors.email }}</span>
         </div>
 
         <div class="form-group">
@@ -28,7 +33,9 @@
             placeholder="Введите пароль"
             :label="passwordLabel"
             :autocomplete="!isLoginForm ? 'current-password' : 'new-password'"
+            aria-describedby="password-error"
           />
+          <span id="password-error" class="sr-only" v-if="formErrors.password">{{ formErrors.password }}</span>
         </div>
 
         <div v-if="!isLoginForm" class="form-group">
@@ -37,7 +44,9 @@
             type="password"
             placeholder="Ввод"
             label="Пароль ещё раз"
+            aria-describedby="confirm-password-error"
           />
+          <span id="confirm-password-error" class="sr-only" v-if="formErrors.confirmPassword">{{ formErrors.confirmPassword }}</span>
         </div>
       </form>
     </template>
@@ -46,7 +55,12 @@
       <div class="actions-group">
         <div class="actions-group__switch-link">
           {{ switchFormText }}
-          <button type="button" class="switch-form" @click="switchForm">
+          <button
+            type="button"
+            class="switch-form"
+            @click="switchForm"
+            aria-label="Переключить форму"
+          >
             {{ switchFormButton }}
           </button>
         </div>
@@ -57,16 +71,16 @@
           class="submit-button"
           :disabled="isSubmitting"
           @click="handleSubmit"
+          aria-label="Отправить форму"
         />
       </div>
 
-      <div v-if="errorMessage" class="message-error">
+      <div v-if="errorMessage" class="message-error" role="alert" aria-live="assertive">
         {{ errorMessage }}
       </div>
     </template>
   </ModalUI>
 </template>
-
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue';
 import ModalUI from '@/components/ui/Modal/ModalUI.vue';
@@ -286,6 +300,7 @@ $primary-color: #2563eb;
   font-size: 18px;
   line-height: 156%;
   color: colors.$green-light;
+  cursor: pointer;
 
   &:hover {
     color: colors.$white;
@@ -334,5 +349,15 @@ $primary-color: #2563eb;
   .message-error {
     font-size: 14px;
   }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 </style>

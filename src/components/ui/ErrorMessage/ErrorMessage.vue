@@ -1,5 +1,10 @@
 <template>
-  <div class="error-message">
+  <div
+    class="error-message"
+    role="alert"
+    aria-live="assertive"
+    :aria-label="`Ошибка: ${message}`"
+  >
     <span class="error-message__text">
       {{ message }}
     </span>

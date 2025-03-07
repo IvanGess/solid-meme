@@ -1,3 +1,33 @@
+<template>
+  <div
+    class="tooltip-container"
+    @mouseenter="showTooltip"
+    @mouseleave="hideTooltip"
+    @focusin="showTooltip"
+    @focusout="hideTooltip"
+    ref="triggerElement"
+    tabindex="0"
+    aria-describedby="tooltip-content"
+  >
+    <slot name="trigger" />
+
+    <transition name="fade">
+      <div
+        v-if="isVisible"
+        ref="tooltipElement"
+        class="tooltip"
+        :class="[`tooltip--${position}`]"
+        role="tooltip"
+      >
+        <div class="tooltip__arrow"></div>
+        <div class="tooltip__content">
+          <slot />
+        </div>
+      </div>
+    </transition>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import type { TooltipProps } from '@/components/ui/Tooltip/interfaces/tooltip.interface.ts';
@@ -23,31 +53,6 @@ const hideTooltip = () => {
   }, 300);
 };
 </script>
-
-<template>
-  <div
-    class="tooltip-container"
-    @mouseenter="showTooltip"
-    @mouseleave="hideTooltip"
-    ref="triggerElement"
-  >
-    <slot name="trigger" />
-
-    <transition name="fade">
-      <div
-        v-if="isVisible"
-        ref="tooltipElement"
-        class="tooltip"
-        :class="[`tooltip--${position}`]"
-      >
-        <div class="tooltip__arrow"></div>
-        <div class="tooltip__content">
-          <slot />
-        </div>
-      </div>
-    </transition>
-  </div>
-</template>
 
 <style lang="scss" scoped>
 @use '@/styles/core/colors' as colors;
@@ -83,7 +88,7 @@ const hideTooltip = () => {
 
 .tooltip--bottom .tooltip__arrow:before {
   bottom: auto;
-  top: -10px;
+  top: -9px;
   border-top: none;
   border-bottom: 10px solid colors.$dark-middle;
 }

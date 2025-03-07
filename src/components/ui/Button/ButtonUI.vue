@@ -1,3 +1,19 @@
+<template>
+  <button
+    :type="type"
+    :disabled="disabled"
+    class="button-wrapper"
+    :class="{ 'button-wrapper--rounded': !hasLabel }"
+    @click="handleClick"
+    :aria-label="hasLabel ? undefined : label"
+    :aria-disabled="disabled"
+  >
+    <slot name="prependIcon"></slot>
+    <span>{{ label }}</span>
+    <slot name="appendIcon"></slot>
+  </button>
+</template>
+
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
@@ -27,16 +43,3 @@ async function handleClick(event: Event) {
 <style scoped>
 @import url('./button.scss');
 </style>
-<template>
-  <button
-    :type="type"
-    :disabled="disabled"
-    class="button-wrapper"
-    :class="{ 'button-wrapper--rounded': !hasLabel }"
-    @click="handleClick"
-  >
-    <slot name="prependIcon"></slot>
-    <span>{{ label }}</span>
-    <slot name="appendIcon"></slot>
-  </button>
-</template>

@@ -5,6 +5,8 @@
       v-bind="$attrs"
       :modelValue="modelValue"
       @update:modelValue="handleInput"
+      :aria-invalid="showError && !!errorMessage"
+      :aria-describedby="errorMessage ? 'error-message' : null"
     />
 
     <div v-if="showFooter" class="input-wrapper__footer">

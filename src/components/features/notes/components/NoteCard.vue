@@ -1,18 +1,22 @@
 <template>
-  <div class="note">
+  <article class="note" aria-labelledby="note-title">
     <div class="note__header">
       <h4 class="note__header--title">{{ title }}</h4>
     </div>
     <div class="note__content">
       <div class="note__content--text">{{ content }}</div>
       <div class="note__content--btn-wrapper">
-        <IconClose />
-        <button class="note__content--btn" @click="$emit('delete')">
+        <IconClose class="note__content--icon" />
+        <button
+          class="note__content--btn"
+          @click="$emit('delete')"
+          aria-label="Удалить заметку"
+        >
           Удалить
         </button>
       </div>
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
@@ -35,6 +39,7 @@ defineEmits<{
 .note {
   width: 100%;
   color: colors.$white;
+  min-width: 0;
 
   &__header {
     position: relative;
@@ -108,6 +113,11 @@ defineEmits<{
       font-size: 20px;
       line-height: 160%;
       letter-spacing: 2.5px;
+      cursor: pointer;
+    }
+
+    &--icon {
+      cursor: pointer;
     }
   }
 }

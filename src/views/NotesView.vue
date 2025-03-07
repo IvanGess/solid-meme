@@ -94,7 +94,8 @@ const handleDeleteNote = async (id: number) => {
 
 .container {
   margin: 0 auto;
-  padding: 40px 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
   position: relative;
 }
 
@@ -122,13 +123,7 @@ const handleDeleteNote = async (id: number) => {
   right: 40px;
   transition: all 0.3s ease;
   z-index: 1000;
-
-  &:hover {
-    background-color: #1976d2;
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-  }
-
+  box-shadow: 0 15px 46px -10px rgba(0, 0, 0, 0.6);
   &:active {
     transform: scale(0.95);
   }
@@ -141,7 +136,8 @@ const handleDeleteNote = async (id: number) => {
 
 @media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
   .container {
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   .floating-button {
@@ -152,7 +148,8 @@ const handleDeleteNote = async (id: number) => {
 
 @media ((min-width: breakpoints.$breakpoint-sm-max) and (max-width: breakpoints.$breakpoint-md-max)) {
   .container {
-    padding: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   .floating-button {
@@ -163,7 +160,8 @@ const handleDeleteNote = async (id: number) => {
 
 @media (max-width: breakpoints.$breakpoint-sm-max) {
   .container {
-    padding: 20px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 
   .floating-button {

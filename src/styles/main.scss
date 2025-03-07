@@ -25,21 +25,25 @@ main {
   margin: 0 auto;
   max-width: 1920px;
   min-width: 360px;
-  padding: 0 160px;
+  padding-left: 160px;
+  padding-right: 160px;
 }
 
 @media ((min-width: breakpoints.$breakpoint-lg-min) and (max-width: breakpoints.$breakpoint-lg-max)) {
   main {
-    padding: 0 80px;
+    padding-left: 80px;
+    padding-right: 80px;
   }
 }
 @media ((min-width: breakpoints.$breakpoint-sm-max) and (max-width: breakpoints.$breakpoint-md-max)) {
   main {
-    padding: 0 40px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
 @media (max-width: breakpoints.$breakpoint-sm-max) {
   main {
-    padding: 0 20px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

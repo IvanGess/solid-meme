@@ -17,6 +17,7 @@
         v-if="isPassword"
         class="input__icon"
         @click="togglePasswordVisibility"
+        :aria-label="showPassword ? 'Скрыть пароль' : 'Показать пароль'"
       >
         <component :is="showPassword ? IconOffPassword : IconOnPassword" />
       </div>
